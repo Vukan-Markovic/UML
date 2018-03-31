@@ -2,21 +2,21 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using Models;
 
 namespace UML_parser
 {
     public partial class UML_parser : Form
     {
+        List <Class> listOfRectangles;
+        bool flag;
         Graphics g;
-        Rectangle rectClass;
-        List<Rectangle> listOfRectangles;
-        bool flag1, flag2;
 
         public UML_parser()
         {
             InitializeComponent();
             g = pnlCenter.CreateGraphics();
-            listOfRectangles = new List<Rectangle>();
+            listOfRectangles = new List<Class>();
         }
 
         private void PnlCenter_MouseClick(object sender, MouseEventArgs e)
@@ -25,8 +25,30 @@ namespace UML_parser
             {
                 if (txtClassName.Text != "")
                 {
-                    rectClass = new Rectangle(e.X, e.Y, 100, 100);
-                    PaintClass(rectClass);
+
+                    foreach (Class rect in listOfRectangles)
+                    {
+                        if (rect.Rect.Contains(e.X, e.Y) || rect.Rect.Contains(e.X - rect.Rect.Width / 2, e.Y - rect.Rect.Height / 2) || rect.Rect.Contains(e.X + rect.Rect.Width, e.Y + rect.Rect.Height) || rect.Rect.Contains(e.X + rect.Rect.Width, e.Y - rect.Rect.Height) || rect.Rect.Contains(e.X - rect.Rect.Width, e.Y + rect.Rect.Height))
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (!flag)
+                    {
+                        Class rectClass = new Class(new Rectangle(e.X - 50, e.Y - 50, 120, 120), txtClassName.Text);
+                        rectClass.Draw(g);
+                        rectClass.Name = txtClassName.Text;
+                        txtClassName.Text = "";
+                        listOfRectangles.Add(rectClass);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ne možete crtati klase jedne preko drugih.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    flag = false;
                 }
                 else
                 {
@@ -41,22 +63,29 @@ namespace UML_parser
                     return;
                 }
 
-                foreach(Rectangle rect in listOfRectangles)
+                g.Clear(pnlCenter.BackColor);
+
+                foreach (Class cl in listOfRectangles)
                 {
-                    if(rect.Contains(e.X, e.Y))
+                    if (!(cl.Rect.Contains(e.X, e.Y)))
                     {
-                        g.DrawRectangle(Pens.Blue, new Rectangle(rect.X, rect.Y, 100, 100));
-                        flag1 = true;
-                        flag2 = true;
+                        cl.BorderColor = Pens.Black;
+                        cl.Selektovana = false;
+                        cl.Draw(g);
+                    }
+                }
+
+                foreach (Class rect in listOfRectangles)
+                {
+                    if (rect.Rect.Contains(e.X, e.Y))
+                    {
+                        
+                        rect.BorderColor = Pens.Blue;
+                        rect.Draw(g);
+                        rect.Selektovana = true;
                         break;
                     }
                 }
-                if(!flag2)
-                {
-                    MessageBox.Show("Treba da selektujete klasu.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                flag2 = false;
             }
             else
             {
@@ -64,35 +93,64 @@ namespace UML_parser
             }
         }
 
-        private void PaintClass(Rectangle rect)
-        {
-            listOfRectangles.Add(rect);
-            g.DrawRectangle(Pens.Gray, rectClass);
-            g.FillRectangle(Brushes.LightGray, rectClass);
-            g.DrawString(txtClassName.Text, this.Font, Brushes.Black, rectClass.X + 30, rectClass.Y + 10);   
-        }
-
         private void CbxShowClassDetails_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (Rectangle rect in listOfRectangles)
+            if (((cbxShowClassDetails.Checked && rdbSelectTool.Checked) || (rdbSelectTool.Checked && cbxShowClassDetails.Checked)))
             {
+                foreach (Class rect in listOfRectangles)
+                {
+                    if (rect.Selektovana)
+                    {
+                        ClassName.Text = rect.Name;
+                        pnlRight.Visible = true;
 
+                        if (rect.ListOfMethods.Count != 0)
+                        {
+                            foreach (Method m in rect.ListOfMethods)
+                            {
+                                listClassBehaviour.Items.Add(FormatMethod(m.Name, m.Accessor));
+                            }
+                        }
+
+                        if (rect.ListOfProperties.Count != 0)
+                        {
+                            foreach (Propertie p in rect.ListOfProperties)
+                            {
+                                listClassState.Items.Add(FormatPropertie(p.Type, p.Name, p.Accessor));
+                            }
+                        }
+
+                        return;
+                    }
+                }
+
+                MessageBox.Show("Morate selektovati neku od klasa kako bi videli njene detalje.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            if ((cbxShowClassDetails.Checked == true && rdbSelectTool.Checked == true || rdbSelectTool.Checked == true && cbxShowClassDetails.Checked) && flag1)
+     
+            else if(!cbxShowClassDetails.Checked)
             {
-                pnlRight.Visible = true;
-                flag1 = false;
-            }
-            else
+                listClassBehaviour.Clear();
+                listClassState.Clear();
+                txtPropertieName.Text = "";
+                txtMethod.Text = "";
+                txtDataType.Text = "";
                 pnlRight.Visible = false;
+            }
         }
 
         private void BtnAddProperty_Click(object sender, EventArgs e)
         {
-            if (txtDataType.Text != "" && txtClassName.Text != "" && cbxPropertieAccessor.SelectedItem != null)
+            if (txtDataType.Text != "" && txtPropertieName.Text != "" && cbxPropertieAccessor.SelectedItem != null)
             {
-                listClassState.Items.Add(FormatPropertie(txtDataType.Text, txtPropertieName.Text, cbxPropertieAccessor.SelectedItem));
+                foreach (Class rect in listOfRectangles)
+                {
+                    if (rect.Selektovana)
+                    {
+                        rect.ListOfProperties.Add(new Propertie(cbxPropertieAccessor.SelectedItem.ToString(), txtPropertieName.Text, txtDataType.Text));
+                        listClassState.Items.Add(FormatPropertie(txtDataType.Text, txtPropertieName.Text, cbxPropertieAccessor.SelectedItem));
+                        break;
+                    }
+                }
             }
             else
             {
@@ -104,7 +162,15 @@ namespace UML_parser
         {
             if (txtMethod.Text != "" && cbxMethodAccessor.SelectedItem != null)
             {
-                listClassBehaviour.Items.Add(FormatMethod(txtMethod.Text, cbxMethodAccessor.SelectedItem));
+                foreach (Class rect in listOfRectangles)
+                {
+                    if (rect.Selektovana)
+                    {
+                        rect.ListOfMethods.Add(new Method(cbxMethodAccessor.ToString(), txtMethod.Text));
+                        listClassBehaviour.Items.Add(FormatMethod(txtMethod.Text, cbxMethodAccessor.SelectedItem));
+                        break;
+                    }
+                }
             }
             else
             {
@@ -121,15 +187,15 @@ namespace UML_parser
         {
             if (accessor.ToString() == "public")
             {
-                return "+ " + className + ": " + type;
+                return "+" + className + ": " + type;
             }
             else if (accessor.ToString() == "protected")
             {
-                return "# " + className + ": " + type; ;
+                return "#" + className + ": " + type;
             }
             else
             {
-                return "- " + className + ": " + type;
+                return "-" + className + ": " + type;
             }
         }
 
@@ -137,15 +203,15 @@ namespace UML_parser
         {
             if (accessor.ToString() == "public")
             {
-                return "+ " + method + "() ";
+                return "+" + method + "()";
             }
             else if (accessor.ToString() == "protected")
             {
-                return "# " + method + "() ";
+                return "#" + method + "()";
             }
             else
             {
-                return "- " + method + "() ";
+                return "-" + method + "()";
             }
         }
     }

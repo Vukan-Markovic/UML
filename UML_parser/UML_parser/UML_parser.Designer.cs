@@ -75,9 +75,9 @@
             this.pnlRight.Controls.Add(this.grbClassBehaviour);
             this.pnlRight.Controls.Add(this.grbAddMethods);
             this.pnlRight.Controls.Add(this.grbClassState);
-            this.pnlRight.Location = new System.Drawing.Point(603, -1);
+            this.pnlRight.Location = new System.Drawing.Point(595, -1);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(185, 614);
+            this.pnlRight.Size = new System.Drawing.Size(190, 614);
             this.pnlRight.TabIndex = 0;
             this.pnlRight.Visible = false;
             // 
@@ -193,6 +193,7 @@
             this.listClassBehaviour.Size = new System.Drawing.Size(128, 69);
             this.listClassBehaviour.TabIndex = 1;
             this.listClassBehaviour.UseCompatibleStateImageBehavior = false;
+            this.listClassBehaviour.View = System.Windows.Forms.View.SmallIcon;
             // 
             // grbAddMethods
             // 
@@ -278,6 +279,7 @@
             this.listClassState.Size = new System.Drawing.Size(128, 69);
             this.listClassState.TabIndex = 0;
             this.listClassState.UseCompatibleStateImageBehavior = false;
+            this.listClassState.View = System.Windows.Forms.View.SmallIcon;
             // 
             // pnlLeft
             // 
@@ -288,9 +290,9 @@
             this.pnlLeft.Controls.Add(this.txtClassName);
             this.pnlLeft.Controls.Add(this.groupBox1);
             this.pnlLeft.Controls.Add(this.lblClassName);
-            this.pnlLeft.Location = new System.Drawing.Point(-5, -1);
+            this.pnlLeft.Location = new System.Drawing.Point(-2, -1);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(163, 614);
+            this.pnlLeft.Size = new System.Drawing.Size(167, 614);
             this.pnlLeft.TabIndex = 1;
             // 
             // cbxShowClassDetails
@@ -382,6 +384,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(784, 610);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLeft);
