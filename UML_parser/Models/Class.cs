@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Models
 {
@@ -11,18 +7,19 @@ namespace Models
     {
         public Rectangle Rect { get; set; }
         public string Name { get; set; }
-        public List<Method> ListOfMethods { get; set; }
-        public List<Propertie> ListOfProperties { get; set; }
-        public bool Selektovana { get; set; }
+        public List <Method> ListOfMethods { get; set; }
+        public List <Propertie> ListOfProperties { get; set; }
+        public bool Selected { get; set; }
         public Pen BorderColor { get; set; }
 
         public Class(Rectangle rect, string name)
         {
             Rect = rect;
             Name = name;
-            ListOfMethods = new List<Method>();
-            ListOfProperties = new List<Propertie>();
+            ListOfMethods = new List <Method>();
+            ListOfProperties = new List <Propertie>();
             BorderColor = Pens.Black;
+            Selected = false;
         }
 
         public void Draw(Graphics g)

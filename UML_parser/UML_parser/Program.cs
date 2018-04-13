@@ -10,7 +10,7 @@ namespace UML_parser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UML_parser());
+            Application.Run(new Parser());
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models
+﻿namespace Models
 {
     public class Relationship
     {
@@ -12,9 +6,11 @@ namespace Models
         public int Cardinality { get; set; }
         public Class Class { get; set; }
 
-        public Relationship(string type)
+        public Relationship(string type, string cardinality, Class Class)
         {
             Type = type;
+            Cardinality = Cardinality;
+            this.Class = Class;
         }
     }
 }

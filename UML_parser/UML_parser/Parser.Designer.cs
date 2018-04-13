@@ -1,6 +1,6 @@
 ﻿namespace UML_parser
 {
-    partial class UML_parser
+    partial class Parser
     {
         /// <summary>
         /// Required designer variable.
@@ -49,7 +49,12 @@
             this.grbClassState = new System.Windows.Forms.GroupBox();
             this.listClassState = new System.Windows.Forms.ListView();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.cbxShowClassDetails = new System.Windows.Forms.CheckBox();
+            this.cbRelationship = new System.Windows.Forms.CheckBox();
+            this.grbAddRelationship = new System.Windows.Forms.GroupBox();
+            this.btnAddRelationship = new System.Windows.Forms.Button();
+            this.cbxType = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
+            this.cbShowClassDetails = new System.Windows.Forms.CheckBox();
             this.btnClearScreen = new System.Windows.Forms.Button();
             this.txtClassName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -63,6 +68,7 @@
             this.grbAddMethods.SuspendLayout();
             this.grbClassState.SuspendLayout();
             this.pnlLeft.SuspendLayout();
+            this.grbAddRelationship.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,7 +291,9 @@
             // 
             this.pnlLeft.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLeft.Controls.Add(this.cbxShowClassDetails);
+            this.pnlLeft.Controls.Add(this.cbRelationship);
+            this.pnlLeft.Controls.Add(this.grbAddRelationship);
+            this.pnlLeft.Controls.Add(this.cbShowClassDetails);
             this.pnlLeft.Controls.Add(this.btnClearScreen);
             this.pnlLeft.Controls.Add(this.txtClassName);
             this.pnlLeft.Controls.Add(this.groupBox1);
@@ -295,16 +303,71 @@
             this.pnlLeft.Size = new System.Drawing.Size(167, 614);
             this.pnlLeft.TabIndex = 1;
             // 
-            // cbxShowClassDetails
+            // cbRelationship
             // 
-            this.cbxShowClassDetails.AutoSize = true;
-            this.cbxShowClassDetails.Location = new System.Drawing.Point(11, 532);
-            this.cbxShowClassDetails.Name = "cbxShowClassDetails";
-            this.cbxShowClassDetails.Size = new System.Drawing.Size(113, 17);
-            this.cbxShowClassDetails.TabIndex = 2;
-            this.cbxShowClassDetails.Text = "Show class details";
-            this.cbxShowClassDetails.UseVisualStyleBackColor = true;
-            this.cbxShowClassDetails.CheckedChanged += new System.EventHandler(this.CbxShowClassDetails_CheckedChanged);
+            this.cbRelationship.AutoSize = true;
+            this.cbRelationship.Location = new System.Drawing.Point(11, 502);
+            this.cbRelationship.Name = "cbRelationship";
+            this.cbRelationship.Size = new System.Drawing.Size(101, 17);
+            this.cbRelationship.TabIndex = 0;
+            this.cbRelationship.Text = "Add relationship";
+            this.cbRelationship.UseVisualStyleBackColor = true;
+            // 
+            // grbAddRelationship
+            // 
+            this.grbAddRelationship.Controls.Add(this.btnAddRelationship);
+            this.grbAddRelationship.Controls.Add(this.cbxType);
+            this.grbAddRelationship.Controls.Add(this.lblType);
+            this.grbAddRelationship.Location = new System.Drawing.Point(17, 302);
+            this.grbAddRelationship.Name = "grbAddRelationship";
+            this.grbAddRelationship.Size = new System.Drawing.Size(130, 159);
+            this.grbAddRelationship.TabIndex = 0;
+            this.grbAddRelationship.TabStop = false;
+            this.grbAddRelationship.Text = "Add relationship";
+            this.grbAddRelationship.Visible = false;
+            // 
+            // btnAddRelationship
+            // 
+            this.btnAddRelationship.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnAddRelationship.Location = new System.Drawing.Point(9, 130);
+            this.btnAddRelationship.Name = "btnAddRelationship";
+            this.btnAddRelationship.Size = new System.Drawing.Size(99, 21);
+            this.btnAddRelationship.TabIndex = 0;
+            this.btnAddRelationship.Text = "Add relationship";
+            this.btnAddRelationship.UseVisualStyleBackColor = false;
+            // 
+            // cbxType
+            // 
+            this.cbxType.FormattingEnabled = true;
+            this.cbxType.Items.AddRange(new object[] {
+            "association",
+            "generalization",
+            "composition"});
+            this.cbxType.Location = new System.Drawing.Point(47, 26);
+            this.cbxType.Name = "cbxType";
+            this.cbxType.Size = new System.Drawing.Size(77, 21);
+            this.cbxType.TabIndex = 1;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(6, 29);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(34, 13);
+            this.lblType.TabIndex = 0;
+            this.lblType.Text = "Type:";
+            // 
+            // cbShowClassDetails
+            // 
+            this.cbShowClassDetails.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.cbShowClassDetails.AutoSize = true;
+            this.cbShowClassDetails.Location = new System.Drawing.Point(11, 532);
+            this.cbShowClassDetails.Name = "cbShowClassDetails";
+            this.cbShowClassDetails.Size = new System.Drawing.Size(113, 17);
+            this.cbShowClassDetails.TabIndex = 2;
+            this.cbShowClassDetails.Text = "Show class details";
+            this.cbShowClassDetails.UseVisualStyleBackColor = true;
+            this.cbShowClassDetails.CheckedChanged += new System.EventHandler(this.CbShowClassDetails_CheckedChanged);
             // 
             // btnClearScreen
             // 
@@ -352,7 +415,6 @@
             // 
             // rdbSelectTool
             // 
-            this.rdbSelectTool.AccessibleRole = System.Windows.Forms.AccessibleRole.RadioButton;
             this.rdbSelectTool.AutoSize = true;
             this.rdbSelectTool.Location = new System.Drawing.Point(6, 28);
             this.rdbSelectTool.Name = "rdbSelectTool";
@@ -380,7 +442,7 @@
             this.pnlCenter.TabIndex = 2;
             this.pnlCenter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PnlCenter_MouseClick);
             // 
-            // UML_parser
+            // Parser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -391,7 +453,7 @@
             this.Controls.Add(this.pnlRight);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "UML_parser";
+            this.Name = "Parser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UML parser";
             this.pnlRight.ResumeLayout(false);
@@ -404,6 +466,8 @@
             this.grbClassState.ResumeLayout(false);
             this.pnlLeft.ResumeLayout(false);
             this.pnlLeft.PerformLayout();
+            this.grbAddRelationship.ResumeLayout(false);
+            this.grbAddRelationship.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -414,7 +478,7 @@
 
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.Panel pnlLeft;
-        private System.Windows.Forms.CheckBox cbxShowClassDetails;
+        private System.Windows.Forms.CheckBox cbShowClassDetails;
         private System.Windows.Forms.Button btnClearScreen;
         private System.Windows.Forms.TextBox txtClassName;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -441,6 +505,11 @@
         private System.Windows.Forms.ListView listClassBehaviour;
         private System.Windows.Forms.ListView listClassState;
         private System.Windows.Forms.Panel pnlCenter;
+        private System.Windows.Forms.GroupBox grbAddRelationship;
+        private System.Windows.Forms.ComboBox cbxType;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.CheckBox cbRelationship;
+        private System.Windows.Forms.Button btnAddRelationship;
     }
 }
 

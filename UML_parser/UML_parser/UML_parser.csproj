@@ -60,16 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UML_parser.cs">
+    <Compile Include="Parser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UML_parser.Designer.cs">
-      <DependentUpon>UML_parser.cs</DependentUpon>
+    <Compile Include="Parser.Designer.cs">
+      <DependentUpon>Parser.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="UML_parser.resx">
-      <DependentUpon>UML_parser.cs</DependentUpon>
+    <EmbeddedResource Include="Parser.resx">
+      <DependentUpon>Parser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
