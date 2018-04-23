@@ -6,7 +6,7 @@ using UML_parser;
 namespace UML_parser_Test
 {
     [TestFixture]
-    class Test
+    class ParserTest
     {
         Parser p;
   
@@ -21,7 +21,7 @@ namespace UML_parser_Test
         [TestCase("string", "mesto", "private", "-mesto: string")]
         public void FormatPropertieParamTest(string type, string propertieName, string accessor, string expectedOutput)
         {
-            StringAssert.AreEqualIgnoringCase(expectedOutput, p.FormatPropertie(type, propertieName, accessor));
+            Assert.AreEqual(expectedOutput, p.FormatPropertie(type, propertieName, accessor), "Provera pravilnog formatiranja propertija.");
         }
 
         [TestCase("prijaviIspit", "public", "+prijaviIspit()")]
@@ -29,22 +29,22 @@ namespace UML_parser_Test
         [TestCase("upisiGodinu", "protected", "#upisiGodinu()")]
         public void FormatMethodParamTest(string methodName, string accessor, string expectedOutput)
         {
-            StringAssert.AreEqualIgnoringCase(expectedOutput, p.FormatMethod(methodName, accessor));
+            Assert.AreEqual(expectedOutput, p.FormatMethod(methodName, accessor), "Provera pravilnog formatiranja metode.");
         }
 
         [TearDown]
-        public void Message()
+        public void MessagesAfterTests()
         {
-            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
             {
-                Console.WriteLine(TestContext.CurrentContext.Test.FullName);
-                Console.WriteLine(TestContext.CurrentContext.Result.Outcome + " test nije prosao");
+                Console.WriteLine(TestContext.CurrentContext.Test.FullName + " test je prosao");
             }
-            else if(TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
+            else if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                Console.WriteLine(TestContext.CurrentContext.Test.FullName);
-                Console.WriteLine(TestContext.CurrentContext.Result.Outcome + " test je prosao");
+                Console.WriteLine(TestContext.CurrentContext.Test.FullName + " test nije prosao");
             }
+
+            TestContext.Out.WriteLine(TestContext.CurrentContext.Result.Outcome);
         }
     }
 }

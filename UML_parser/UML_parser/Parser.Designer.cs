@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlRight = new System.Windows.Forms.Panel();
+            this.pnlClassDetails = new System.Windows.Forms.Panel();
             this.ClassName = new System.Windows.Forms.Label();
             this.grbAddProperties = new System.Windows.Forms.GroupBox();
             this.cbxPropertieAccessor = new System.Windows.Forms.ComboBox();
@@ -49,12 +49,14 @@
             this.grbClassState = new System.Windows.Forms.GroupBox();
             this.listClassState = new System.Windows.Forms.ListView();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.cbRelationship = new System.Windows.Forms.CheckBox();
             this.grbAddRelationship = new System.Windows.Forms.GroupBox();
-            this.btnAddRelationship = new System.Windows.Forms.Button();
-            this.cbxType = new System.Windows.Forms.ComboBox();
-            this.lblType = new System.Windows.Forms.Label();
-            this.cbShowClassDetails = new System.Windows.Forms.CheckBox();
+            this.rdbGeneralization = new System.Windows.Forms.RadioButton();
+            this.rdbComposition = new System.Windows.Forms.RadioButton();
+            this.rdbAggregation = new System.Windows.Forms.RadioButton();
+            this.rdbRealization = new System.Windows.Forms.RadioButton();
+            this.rdbAssociation = new System.Windows.Forms.RadioButton();
+            this.rdbNone = new System.Windows.Forms.RadioButton();
+            this.cbShowObjectDetails = new System.Windows.Forms.CheckBox();
             this.btnClearScreen = new System.Windows.Forms.Button();
             this.txtClassName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -62,7 +64,14 @@
             this.rdbSelectTool = new System.Windows.Forms.RadioButton();
             this.lblClassName = new System.Windows.Forms.Label();
             this.pnlCenter = new System.Windows.Forms.Panel();
-            this.pnlRight.SuspendLayout();
+            this.pnlRelationshipDetails = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbxRightMultiplicity = new System.Windows.Forms.ComboBox();
+            this.cbxLeftMultiplicity = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtRelationshipName = new System.Windows.Forms.TextBox();
+            this.pnlClassDetails.SuspendLayout();
             this.grbAddProperties.SuspendLayout();
             this.grbClassBehaviour.SuspendLayout();
             this.grbAddMethods.SuspendLayout();
@@ -70,22 +79,23 @@
             this.pnlLeft.SuspendLayout();
             this.grbAddRelationship.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.pnlRelationshipDetails.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlRight
+            // pnlClassDetails
             // 
-            this.pnlRight.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnlRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRight.Controls.Add(this.ClassName);
-            this.pnlRight.Controls.Add(this.grbAddProperties);
-            this.pnlRight.Controls.Add(this.grbClassBehaviour);
-            this.pnlRight.Controls.Add(this.grbAddMethods);
-            this.pnlRight.Controls.Add(this.grbClassState);
-            this.pnlRight.Location = new System.Drawing.Point(595, -1);
-            this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(190, 614);
-            this.pnlRight.TabIndex = 0;
-            this.pnlRight.Visible = false;
+            this.pnlClassDetails.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlClassDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlClassDetails.Controls.Add(this.ClassName);
+            this.pnlClassDetails.Controls.Add(this.grbAddProperties);
+            this.pnlClassDetails.Controls.Add(this.grbClassBehaviour);
+            this.pnlClassDetails.Controls.Add(this.grbAddMethods);
+            this.pnlClassDetails.Controls.Add(this.grbClassState);
+            this.pnlClassDetails.Location = new System.Drawing.Point(603, -1);
+            this.pnlClassDetails.Name = "pnlClassDetails";
+            this.pnlClassDetails.Size = new System.Drawing.Size(190, 614);
+            this.pnlClassDetails.TabIndex = 0;
+            this.pnlClassDetails.Visible = false;
             // 
             // ClassName
             // 
@@ -291,9 +301,8 @@
             // 
             this.pnlLeft.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLeft.Controls.Add(this.cbRelationship);
             this.pnlLeft.Controls.Add(this.grbAddRelationship);
-            this.pnlLeft.Controls.Add(this.cbShowClassDetails);
+            this.pnlLeft.Controls.Add(this.cbShowObjectDetails);
             this.pnlLeft.Controls.Add(this.btnClearScreen);
             this.pnlLeft.Controls.Add(this.txtClassName);
             this.pnlLeft.Controls.Add(this.groupBox1);
@@ -303,71 +312,98 @@
             this.pnlLeft.Size = new System.Drawing.Size(167, 614);
             this.pnlLeft.TabIndex = 1;
             // 
-            // cbRelationship
-            // 
-            this.cbRelationship.AutoSize = true;
-            this.cbRelationship.Location = new System.Drawing.Point(11, 502);
-            this.cbRelationship.Name = "cbRelationship";
-            this.cbRelationship.Size = new System.Drawing.Size(101, 17);
-            this.cbRelationship.TabIndex = 0;
-            this.cbRelationship.Text = "Add relationship";
-            this.cbRelationship.UseVisualStyleBackColor = true;
-            // 
             // grbAddRelationship
             // 
-            this.grbAddRelationship.Controls.Add(this.btnAddRelationship);
-            this.grbAddRelationship.Controls.Add(this.cbxType);
-            this.grbAddRelationship.Controls.Add(this.lblType);
-            this.grbAddRelationship.Location = new System.Drawing.Point(17, 302);
+            this.grbAddRelationship.Controls.Add(this.rdbGeneralization);
+            this.grbAddRelationship.Controls.Add(this.rdbComposition);
+            this.grbAddRelationship.Controls.Add(this.rdbAggregation);
+            this.grbAddRelationship.Controls.Add(this.rdbRealization);
+            this.grbAddRelationship.Controls.Add(this.rdbAssociation);
+            this.grbAddRelationship.Controls.Add(this.rdbNone);
+            this.grbAddRelationship.Location = new System.Drawing.Point(11, 171);
             this.grbAddRelationship.Name = "grbAddRelationship";
             this.grbAddRelationship.Size = new System.Drawing.Size(130, 159);
             this.grbAddRelationship.TabIndex = 0;
             this.grbAddRelationship.TabStop = false;
-            this.grbAddRelationship.Text = "Add relationship";
-            this.grbAddRelationship.Visible = false;
+            this.grbAddRelationship.Text = "Choose a relation";
             // 
-            // btnAddRelationship
+            // rdbGeneralization
             // 
-            this.btnAddRelationship.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnAddRelationship.Location = new System.Drawing.Point(9, 130);
-            this.btnAddRelationship.Name = "btnAddRelationship";
-            this.btnAddRelationship.Size = new System.Drawing.Size(99, 21);
-            this.btnAddRelationship.TabIndex = 0;
-            this.btnAddRelationship.Text = "Add relationship";
-            this.btnAddRelationship.UseVisualStyleBackColor = false;
+            this.rdbGeneralization.AutoSize = true;
+            this.rdbGeneralization.Location = new System.Drawing.Point(6, 111);
+            this.rdbGeneralization.Name = "rdbGeneralization";
+            this.rdbGeneralization.Size = new System.Drawing.Size(92, 17);
+            this.rdbGeneralization.TabIndex = 1;
+            this.rdbGeneralization.TabStop = true;
+            this.rdbGeneralization.Text = "Generalization";
+            this.rdbGeneralization.UseVisualStyleBackColor = true;
             // 
-            // cbxType
+            // rdbComposition
             // 
-            this.cbxType.FormattingEnabled = true;
-            this.cbxType.Items.AddRange(new object[] {
-            "association",
-            "generalization",
-            "composition"});
-            this.cbxType.Location = new System.Drawing.Point(47, 26);
-            this.cbxType.Name = "cbxType";
-            this.cbxType.Size = new System.Drawing.Size(77, 21);
-            this.cbxType.TabIndex = 1;
+            this.rdbComposition.AutoSize = true;
+            this.rdbComposition.Location = new System.Drawing.Point(6, 88);
+            this.rdbComposition.Name = "rdbComposition";
+            this.rdbComposition.Size = new System.Drawing.Size(82, 17);
+            this.rdbComposition.TabIndex = 2;
+            this.rdbComposition.TabStop = true;
+            this.rdbComposition.Text = "Composition";
+            this.rdbComposition.UseVisualStyleBackColor = true;
             // 
-            // lblType
+            // rdbAggregation
             // 
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(6, 29);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(34, 13);
-            this.lblType.TabIndex = 0;
-            this.lblType.Text = "Type:";
+            this.rdbAggregation.AutoSize = true;
+            this.rdbAggregation.Location = new System.Drawing.Point(6, 65);
+            this.rdbAggregation.Name = "rdbAggregation";
+            this.rdbAggregation.Size = new System.Drawing.Size(82, 17);
+            this.rdbAggregation.TabIndex = 4;
+            this.rdbAggregation.TabStop = true;
+            this.rdbAggregation.Text = "Aggregation";
+            this.rdbAggregation.UseVisualStyleBackColor = true;
             // 
-            // cbShowClassDetails
+            // rdbRealization
             // 
-            this.cbShowClassDetails.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.cbShowClassDetails.AutoSize = true;
-            this.cbShowClassDetails.Location = new System.Drawing.Point(11, 532);
-            this.cbShowClassDetails.Name = "cbShowClassDetails";
-            this.cbShowClassDetails.Size = new System.Drawing.Size(113, 17);
-            this.cbShowClassDetails.TabIndex = 2;
-            this.cbShowClassDetails.Text = "Show class details";
-            this.cbShowClassDetails.UseVisualStyleBackColor = true;
-            this.cbShowClassDetails.CheckedChanged += new System.EventHandler(this.CbShowClassDetails_CheckedChanged);
+            this.rdbRealization.AutoSize = true;
+            this.rdbRealization.Location = new System.Drawing.Point(6, 131);
+            this.rdbRealization.Name = "rdbRealization";
+            this.rdbRealization.Size = new System.Drawing.Size(77, 17);
+            this.rdbRealization.TabIndex = 5;
+            this.rdbRealization.TabStop = true;
+            this.rdbRealization.Text = "Realization";
+            this.rdbRealization.UseVisualStyleBackColor = true;
+            // 
+            // rdbAssociation
+            // 
+            this.rdbAssociation.AutoSize = true;
+            this.rdbAssociation.Location = new System.Drawing.Point(6, 42);
+            this.rdbAssociation.Name = "rdbAssociation";
+            this.rdbAssociation.Size = new System.Drawing.Size(79, 17);
+            this.rdbAssociation.TabIndex = 3;
+            this.rdbAssociation.TabStop = true;
+            this.rdbAssociation.Text = "Association";
+            this.rdbAssociation.UseVisualStyleBackColor = true;
+            // 
+            // rdbNone
+            // 
+            this.rdbNone.AutoSize = true;
+            this.rdbNone.Location = new System.Drawing.Point(6, 19);
+            this.rdbNone.Name = "rdbNone";
+            this.rdbNone.Size = new System.Drawing.Size(51, 17);
+            this.rdbNone.TabIndex = 0;
+            this.rdbNone.TabStop = true;
+            this.rdbNone.Text = "None";
+            this.rdbNone.UseVisualStyleBackColor = true;
+            // 
+            // cbShowObjectDetails
+            // 
+            this.cbShowObjectDetails.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.cbShowObjectDetails.AutoSize = true;
+            this.cbShowObjectDetails.Location = new System.Drawing.Point(3, 535);
+            this.cbShowObjectDetails.Name = "cbShowObjectDetails";
+            this.cbShowObjectDetails.Size = new System.Drawing.Size(161, 17);
+            this.cbShowObjectDetails.TabIndex = 2;
+            this.cbShowObjectDetails.Text = "Show selected object details";
+            this.cbShowObjectDetails.UseVisualStyleBackColor = true;
+            this.cbShowObjectDetails.CheckedChanged += new System.EventHandler(this.CbShowClassDetails_CheckedChanged);
             // 
             // btnClearScreen
             // 
@@ -442,22 +478,97 @@
             this.pnlCenter.TabIndex = 2;
             this.pnlCenter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PnlCenter_MouseClick);
             // 
+            // pnlRelationshipDetails
+            // 
+            this.pnlRelationshipDetails.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlRelationshipDetails.Controls.Add(this.label3);
+            this.pnlRelationshipDetails.Controls.Add(this.label2);
+            this.pnlRelationshipDetails.Controls.Add(this.cbxRightMultiplicity);
+            this.pnlRelationshipDetails.Controls.Add(this.cbxLeftMultiplicity);
+            this.pnlRelationshipDetails.Controls.Add(this.label1);
+            this.pnlRelationshipDetails.Controls.Add(this.txtRelationshipName);
+            this.pnlRelationshipDetails.Location = new System.Drawing.Point(599, -1);
+            this.pnlRelationshipDetails.Name = "pnlRelationshipDetails";
+            this.pnlRelationshipDetails.Size = new System.Drawing.Size(190, 610);
+            this.pnlRelationshipDetails.TabIndex = 0;
+            this.pnlRelationshipDetails.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(56, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Left multiplicity";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(56, 213);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Right multiplicity";
+            // 
+            // cbxRightMultiplicity
+            // 
+            this.cbxRightMultiplicity.FormattingEnabled = true;
+            this.cbxRightMultiplicity.Items.AddRange(new object[] {
+            "1",
+            "0..1",
+            "1*"});
+            this.cbxRightMultiplicity.Location = new System.Drawing.Point(35, 255);
+            this.cbxRightMultiplicity.Name = "cbxRightMultiplicity";
+            this.cbxRightMultiplicity.Size = new System.Drawing.Size(121, 21);
+            this.cbxRightMultiplicity.TabIndex = 3;
+            // 
+            // cbxLeftMultiplicity
+            // 
+            this.cbxLeftMultiplicity.FormattingEnabled = true;
+            this.cbxLeftMultiplicity.Items.AddRange(new object[] {
+            "1",
+            "0..1",
+            "1*"});
+            this.cbxLeftMultiplicity.Location = new System.Drawing.Point(35, 143);
+            this.cbxLeftMultiplicity.Name = "cbxLeftMultiplicity";
+            this.cbxLeftMultiplicity.Size = new System.Drawing.Size(121, 21);
+            this.cbxLeftMultiplicity.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(47, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Relationship name:";
+            this.label1.Visible = false;
+            // 
+            // txtRelationshipName
+            // 
+            this.txtRelationshipName.Location = new System.Drawing.Point(35, 49);
+            this.txtRelationshipName.Name = "txtRelationshipName";
+            this.txtRelationshipName.Size = new System.Drawing.Size(121, 20);
+            this.txtRelationshipName.TabIndex = 0;
+            // 
             // Parser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(784, 610);
+            this.Controls.Add(this.pnlRelationshipDetails);
+            this.Controls.Add(this.pnlClassDetails);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLeft);
-            this.Controls.Add(this.pnlRight);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Parser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UML parser";
-            this.pnlRight.ResumeLayout(false);
-            this.pnlRight.PerformLayout();
+            this.pnlClassDetails.ResumeLayout(false);
+            this.pnlClassDetails.PerformLayout();
             this.grbAddProperties.ResumeLayout(false);
             this.grbAddProperties.PerformLayout();
             this.grbClassBehaviour.ResumeLayout(false);
@@ -470,15 +581,17 @@
             this.grbAddRelationship.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.pnlRelationshipDetails.ResumeLayout(false);
+            this.pnlRelationshipDetails.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlRight;
+        private System.Windows.Forms.Panel pnlClassDetails;
         private System.Windows.Forms.Panel pnlLeft;
-        private System.Windows.Forms.CheckBox cbShowClassDetails;
+        private System.Windows.Forms.CheckBox cbShowObjectDetails;
         private System.Windows.Forms.Button btnClearScreen;
         private System.Windows.Forms.TextBox txtClassName;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -506,10 +619,19 @@
         private System.Windows.Forms.ListView listClassState;
         private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.GroupBox grbAddRelationship;
-        private System.Windows.Forms.ComboBox cbxType;
-        private System.Windows.Forms.Label lblType;
-        private System.Windows.Forms.CheckBox cbRelationship;
-        private System.Windows.Forms.Button btnAddRelationship;
+        private System.Windows.Forms.RadioButton rdbGeneralization;
+        private System.Windows.Forms.RadioButton rdbComposition;
+        private System.Windows.Forms.RadioButton rdbAggregation;
+        private System.Windows.Forms.RadioButton rdbRealization;
+        private System.Windows.Forms.RadioButton rdbAssociation;
+        private System.Windows.Forms.RadioButton rdbNone;
+        private System.Windows.Forms.Panel pnlRelationshipDetails;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbxRightMultiplicity;
+        private System.Windows.Forms.ComboBox cbxLeftMultiplicity;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtRelationshipName;
     }
 }
 
