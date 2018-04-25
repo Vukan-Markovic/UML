@@ -34,7 +34,7 @@ namespace Models
                 g.DrawLine(Pens.Black, LeftClass.Rect.X, LeftClass.Rect.Y, RightClass.Rect.X, RightClass.Rect.Y);
             }
 
-            g.DrawString(Type, Font, Brushes.Black, LeftClass.Rect.X + LeftClass.Rect.Width / 4, LeftClass.Rect.Y + LeftClass.Rect.Height);
+            g.DrawString(Type, Font, Brushes.Black, LeftClass.Rect.X + LeftClass.Rect.Width / 4, LeftClass.Rect.Y + LeftClass.Rect.Height / 2);
 
             if (LeftMultiplicity != "" && RightMultiplicity != "")
             {

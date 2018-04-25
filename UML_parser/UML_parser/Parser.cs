@@ -9,16 +9,17 @@ namespace UML_parser
     public partial class Parser : Form
     {
         List <Class> listOfClasses;
-        List<Relationship> listOfRelationships;
-        bool flag1, flag2, flag3;
+        List <Relationship> listOfRelationships;
         Graphics g;
+        Relationship relation;
+        Class rectClass;
 
         public Parser()
         {
             InitializeComponent();
-            g = pnlCenter.CreateGraphics();
             listOfClasses = new List <Class>();
             listOfRelationships = new List<Relationship>();
+            g = pnlCenter.CreateGraphics();
         }
 
         private void PnlCenter_MouseClick(object sender, MouseEventArgs klik)
@@ -40,10 +41,7 @@ namespace UML_parser
                             MessageBox.Show("Ne možete crtati klase jedne preko drugih.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                    }
 
-                    foreach (Class cl in listOfClasses)
-                    {
                         if (cl.Name == txtClassName.Text)
                         {
                             MessageBox.Show("Dve klase ne mogu imati isti naziv.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -51,7 +49,14 @@ namespace UML_parser
                         }
                     }
 
-                    Class rectClass = new Class(new Rectangle(klik.X - 60, klik.Y - 60, 120, 120), txtClassName.Text);
+                    rectClass = new Class(new Rectangle(klik.X - 60, klik.Y - 60, 120, 120), txtClassName.Text);
+
+                    if (rectClass.Rect.X < pnlLeft.Width / 2 || rectClass.Rect.Y < pnlCenter.Location.Y)
+                    {
+                        MessageBox.Show("Klasa izlazi izvan granica panela.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     rectClass.Draw(g);
                     listOfClasses.Add(rectClass);
                     txtClassName.Text = "";
@@ -81,7 +86,7 @@ namespace UML_parser
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
-                                    Relationship relation = new Relationship(cl, cl1, "aggregation");
+                                    relation = new Relationship(cl, cl1, "aggregation");
                                     listOfRelationships.Add(relation);
                                     relation.Draw(g);
                                 }
@@ -96,7 +101,7 @@ namespace UML_parser
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
-                                    Relationship relation = new Relationship(cl, cl1, "association");
+                                    relation = new Relationship(cl, cl1, "association");
                                     listOfRelationships.Add(relation);
                                     relation.Draw(g);
                                 }
@@ -111,7 +116,7 @@ namespace UML_parser
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
-                                    Relationship relation = new Relationship(cl, cl1, "composition");
+                                    relation = new Relationship(cl, cl1, "composition");
                                     listOfRelationships.Add(relation);
                                     relation.Draw(g);
                                 }
@@ -126,7 +131,7 @@ namespace UML_parser
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
-                                    Relationship relation = new Relationship(cl, cl1, "generalization");
+                                    relation = new Relationship(cl, cl1, "generalization");
                                     listOfRelationships.Add(relation);
                                     relation.Draw(g);
                                 }
@@ -141,7 +146,7 @@ namespace UML_parser
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
-                                    Relationship relation = new Relationship(cl, cl1, "realization");
+                                    relation = new Relationship(cl, cl1, "realization");
                                     listOfRelationships.Add(relation);
                                     relation.Draw(g);
                                 }
@@ -150,28 +155,22 @@ namespace UML_parser
                     }
                     else
                     {
-                        if (!(cl.Rect.Contains(klik.X, klik.Y)))
+                        if (cl.Rect.Contains(klik.X, klik.Y))
                         {
-                            cl.BorderColor = Pens.Black;
-                            cl.Selected = false;
-                        }
-                        else
-                        {
-                            foreach(Relationship relation in listOfRelationships)
+                            cl.Selected = true;
+
+                            foreach (Relationship relation in listOfRelationships)
                             {
                                 if (relation.Selected)
                                 {
-                                    flag3 = true;
+                                    cl.Selected = false;
+                                    break;
                                 }
                             }
-
-                            if(!flag3 || listOfRelationships.Count == 0)
-                            {
-                                cl.BorderColor = Pens.Blue;
-                                cl.Selected = true;
-                            }
-
-                            flag3 = false;
+                        }
+                        else
+                        {
+                            cl.Selected = false;
                         }
                     }
 
@@ -182,20 +181,16 @@ namespace UML_parser
                 {
                     if (Udaljenost(relation.LeftClass.Rect.X, relation.LeftClass.Rect.Y, klik.X, klik.Y) + Udaljenost(relation.RightClass.Rect.X, relation.RightClass.Rect.Y, klik.X, klik.Y) - Udaljenost(relation.RightClass.Rect.X, relation.RightClass.Rect.Y, relation.LeftClass.Rect.X, relation.LeftClass.Rect.Y) <= 1)
                     {
+                        relation.Selected = true;
+
                         foreach (Class cl in listOfClasses)
                         {
                             if (cl.Selected)
                             {
-                                flag2 = true;
+                                relation.Selected = false;
+                                break;
                             }
                         }
-
-                        if (!flag2)
-                        {
-                            relation.Selected = true;
-                        }
-
-                        flag2 = false;
                     }
                     else
                     {
@@ -260,19 +255,17 @@ namespace UML_parser
         {
             g.Clear(BackColor);
             listOfClasses.Clear();
+            listOfRelationships.Clear();
         }
 
         private void CbShowClassDetails_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbSelectTool.Checked && cbShowObjectDetails.Checked)
+            if (cbShowObjectDetails.Checked)
             {
                 foreach (Class cl in listOfClasses)
                 {
                     if (cl.Selected)
                     {
-                        ClassName.Text = cl.Name;
-                        pnlClassDetails.Visible = true;
-
                         if (cl.ListOfMethods.Count != 0)
                         {
                             foreach (Method m in cl.ListOfMethods)
@@ -288,6 +281,11 @@ namespace UML_parser
                                 listClassState.Items.Add(FormatPropertie(p.Type, p.Name, p.Accessor));
                             }
                         }
+
+                        ClassName.Text = cl.Name;
+                        pnlRelationshipDetails.Visible = false;
+                        pnlClassDetails.Visible = true;
+                        return;
                     }
                 }
 
@@ -308,52 +306,79 @@ namespace UML_parser
                             cbxRightMultiplicity.SelectedItem = relation.RightMultiplicity;
                         }
 
+                        pnlClassDetails.Visible = false;
                         pnlRelationshipDetails.Visible = true;
+                        return;
                     }
                 }
 
-                flag1 = true;
+                MessageBox.Show("Morate selektovati neki objekat kako bi videli njegove detalje.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            else if (!cbShowObjectDetails.Checked)
+            else
             {
-                listClassBehaviour.Clear();
-                listClassState.Clear();
-                txtPropertieName.Text = "";
-                txtMethod.Text = "";
-                txtDataType.Text = "";
-                pnlClassDetails.Visible = false;
-
-                foreach (Relationship relation in listOfRelationships)
+                if (pnlClassDetails.Visible)
                 {
-                    if (relation.Selected)
-                    {
-                        if (txtRelationshipName.Text != "")
-                        {
-                            relation.Name = txtRelationshipName.Text;
-                        }
-                        if (cbxLeftMultiplicity.SelectedItem != null)
-                        {
-                            relation.LeftMultiplicity = cbxLeftMultiplicity.SelectedItem.ToString();
-                        }
-                        if (cbxRightMultiplicity.SelectedItem != null)
-                        {
-                            relation.RightMultiplicity = cbxRightMultiplicity.SelectedItem.ToString();
-                        }
-                    }
+                    listClassBehaviour.Clear();
+                    listClassState.Clear();
+                    txtPropertieName.Text = "";
+                    txtMethod.Text = "";
+                    txtDataType.Text = "";
+                    pnlClassDetails.Visible = false;
                 }
+                else if (pnlRelationshipDetails.Visible)
+                { 
+                    if (txtRelationshipName.Text != "" || cbxLeftMultiplicity.SelectedItem != null || cbxRightMultiplicity.SelectedItem != null)
+                    {
+                        if (txtRelationshipName.Text == "" || cbxLeftMultiplicity.SelectedItem == null || cbxRightMultiplicity.SelectedItem == null)
+                        {
+                            MessageBox.Show("Morate uneti sva polja za datu vezu.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            cbShowObjectDetails.Checked = true;
+                            return;
+                        }
 
-                pnlRelationshipDetails.Visible = false;
-                txtRelationshipName.Text = "";
-                cbxLeftMultiplicity.SelectedItem = null;
-                cbxRightMultiplicity.SelectedItem = null;
-            }
-            else if (!flag1)
-            {
-                MessageBox.Show("Morate selektovati neku od klasa kako bi videli njene detalje.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                        foreach (Relationship relation in listOfRelationships)
+                        {
+                            if (relation.Selected)
+                            {
+                                relation.Name = txtRelationshipName.Text;
 
-            flag1 = false;
+                                if (relation.Type == "aggregation")
+                                {
+                                    if (cbxLeftMultiplicity.SelectedItem.ToString() != "0..1" && cbxRightMultiplicity.SelectedItem.ToString() != "0..1")
+                                    {
+                                        MessageBox.Show("Kod agregacije jedan od kardinaliteta mora biti 0..1, probajte ponovo da unesete vrednosti.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        cbShowObjectDetails.Checked = true;
+                                        cbxLeftMultiplicity.SelectedItem = null;
+                                        cbxRightMultiplicity.SelectedItem = null;
+                                        return;
+                                    }
+                                }
+
+                                if (relation.Type == "composition")
+                                {
+                                    if (cbxLeftMultiplicity.SelectedItem.ToString() != "1" && cbxRightMultiplicity.SelectedItem.ToString() != "1")
+                                    {
+                                        MessageBox.Show("Kod kompozicije jedan od kardinaliteta mora biti 1, probajte ponovo da unesete vrednosti.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        cbShowObjectDetails.Checked = true;
+                                        cbxLeftMultiplicity.SelectedItem = null;
+                                        cbxRightMultiplicity.SelectedItem = null;
+                                        return;
+                                    }
+                                }
+
+                                relation.LeftMultiplicity = cbxLeftMultiplicity.SelectedItem.ToString();
+                                relation.RightMultiplicity = cbxRightMultiplicity.SelectedItem.ToString();
+                            }
+                        }
+
+                        txtRelationshipName.Text = "";
+                        cbxLeftMultiplicity.SelectedItem = null;
+                        cbxRightMultiplicity.SelectedItem = null;
+                    }
+
+                    pnlRelationshipDetails.Visible = false;
+                }
+            }
         }
 
         public string FormatMethod(string methodName, string accessor)

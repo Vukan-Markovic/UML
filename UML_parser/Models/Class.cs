@@ -10,7 +10,6 @@ namespace Models
         public List <Method> ListOfMethods { get; set; }
         public List <Propertie> ListOfProperties { get; set; }
         public bool Selected { get; set; }
-        public Pen BorderColor { get; set; }
 
         public Class(Rectangle rect, string name)
         {
@@ -18,15 +17,22 @@ namespace Models
             Name = name;
             ListOfMethods = new List <Method>();
             ListOfProperties = new List <Propertie>();
-            BorderColor = Pens.Black;
             Selected = false;
         }
 
         public void Draw(Graphics g)
         {
-            g.DrawRectangle(BorderColor , this.Rect);
-            g.FillRectangle(Brushes.LightSkyBlue, new Rectangle(this.Rect.X + 2, this.Rect.Y + 2, 118, 118));
-            g.DrawString(this.Name, new Font(FontFamily.GenericSerif, 10, FontStyle.Bold), Brushes.CornflowerBlue, this.Rect.X + 15, this.Rect.Y + 8);
+            if (Selected)
+            {
+                g.DrawRectangle(Pens.Blue, Rect);
+            }
+            else
+            {
+                g.DrawRectangle(Pens.Black, Rect);
+            }
+
+            g.FillRectangle(Brushes.LightSkyBlue, new Rectangle(Rect.X + 2, Rect.Y + 2, 118, 118));
+            g.DrawString(Name, new Font(FontFamily.GenericSerif, 10, FontStyle.Bold), Brushes.CornflowerBlue, Rect.X + 15, Rect.Y + 8);
         }
     }
 }
