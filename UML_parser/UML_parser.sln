@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UML_parser", "UML_parser\UM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{D37818A5-C0E2-42CF-9905-97592CEDAC09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UML_parser_Test", "UML_parser_Test\UML_parser_Test.csproj", "{96B10A9B-3C53-4633-B5D4-BE032A916BB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UML_parser_Tests", "UML_parser_Test\UML_parser_Tests.csproj", "{96B10A9B-3C53-4633-B5D4-BE032A916BB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

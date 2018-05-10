@@ -7,12 +7,10 @@ namespace Models
         public string Name { get; set; }
         public string LeftMultiplicity { get; set; }
         public string RightMultiplicity { get; set; }
-        public Class LeftClass { get; set; }
-        public Class RightClass { get; set; }
         public string Type { get; set; }
         public bool Selected { get; set; }
-        public object Line { get; set; }
-        public Font Font { get; set; }
+        public Class LeftClass { get; set; }
+        public Class RightClass { get; set; }
 
         public Relationship(Class leftClass, Class rightClass, string type)
         {
@@ -20,7 +18,6 @@ namespace Models
             RightClass = rightClass;
             Type = type;
             Selected = false;
-            Font = new Font(FontFamily.GenericSerif, 10, FontStyle.Bold);
         }
 
         public void Draw(Graphics g)
@@ -34,12 +31,12 @@ namespace Models
                 g.DrawLine(Pens.Black, LeftClass.Rect.X, LeftClass.Rect.Y, RightClass.Rect.X, RightClass.Rect.Y);
             }
 
-            g.DrawString(Type, Font, Brushes.Black, LeftClass.Rect.X + LeftClass.Rect.Width / 4, LeftClass.Rect.Y + LeftClass.Rect.Height / 2);
+            g.DrawString(Type, new Font(FontFamily.GenericSerif, 10, FontStyle.Bold), Brushes.Black, LeftClass.Rect.X + LeftClass.Rect.Width / 4, LeftClass.Rect.Y + LeftClass.Rect.Height / 2);
 
             if (LeftMultiplicity != "" && RightMultiplicity != "")
             {
-                g.DrawString(LeftMultiplicity, Font, Brushes.Black, LeftClass.Rect.X, LeftClass.Rect.Y);
-                g.DrawString(RightMultiplicity, Font, Brushes.Black, RightClass.Rect.X, RightClass.Rect.Y);
+                g.DrawString(LeftMultiplicity, new Font(FontFamily.GenericSerif, 10, FontStyle.Bold), Brushes.Black, LeftClass.Rect.X, LeftClass.Rect.Y);
+                g.DrawString(RightMultiplicity, new Font(FontFamily.GenericSerif, 10, FontStyle.Bold), Brushes.Black, RightClass.Rect.X, RightClass.Rect.Y);
             }
         }
 

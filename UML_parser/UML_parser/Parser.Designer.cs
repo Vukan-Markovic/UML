@@ -479,7 +479,7 @@
             this.cbShowObjectDetails.TabIndex = 2;
             this.cbShowObjectDetails.Text = "Show selected object details";
             this.cbShowObjectDetails.UseVisualStyleBackColor = true;
-            this.cbShowObjectDetails.CheckedChanged += new System.EventHandler(this.CbShowClassDetails_CheckedChanged);
+            this.cbShowObjectDetails.CheckedChanged += new System.EventHandler(this.CbShowObjectDetails_CheckedChanged);
             // 
             // btnClearScreen
             // 
@@ -591,15 +591,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlClassDetails;
         private System.Windows.Forms.Panel pnlLeft;
-        private System.Windows.Forms.CheckBox cbShowObjectDetails;
-        private System.Windows.Forms.Button btnClearScreen;
-        private System.Windows.Forms.TextBox txtClassName;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rdbClass;
-        private System.Windows.Forms.RadioButton rdbSelectTool;
         private System.Windows.Forms.Label lblClassName;
         private System.Windows.Forms.GroupBox grbClassState;
         private System.Windows.Forms.GroupBox grbAddProperties;
@@ -617,24 +610,30 @@
         private System.Windows.Forms.Button btnAddMethod;
         private System.Windows.Forms.ComboBox cbxPropertieAccessor;
         private System.Windows.Forms.ComboBox cbxMethodAccessor;
-        private System.Windows.Forms.Label ClassName;
         private System.Windows.Forms.ListView listClassBehaviour;
         private System.Windows.Forms.ListView listClassState;
-        private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.GroupBox grbAddRelationship;
-        private System.Windows.Forms.RadioButton rdbGeneralization;
-        private System.Windows.Forms.RadioButton rdbComposition;
-        private System.Windows.Forms.RadioButton rdbAggregation;
-        private System.Windows.Forms.RadioButton rdbRealization;
-        private System.Windows.Forms.RadioButton rdbAssociation;
-        private System.Windows.Forms.RadioButton rdbNone;
-        private System.Windows.Forms.Panel pnlRelationshipDetails;
         private System.Windows.Forms.Label lblLeftMultiplicity;
         private System.Windows.Forms.Label lblRightMultiplicity;
-        private System.Windows.Forms.ComboBox cbxRightMultiplicity;
-        private System.Windows.Forms.ComboBox cbxLeftMultiplicity;
         private System.Windows.Forms.Label lblRelationshipName;
-        private System.Windows.Forms.TextBox txtRelationshipName;
+        public System.Windows.Forms.Panel pnlRelationshipDetails;
+        public System.Windows.Forms.Panel pnlClassDetails;
+        public System.Windows.Forms.CheckBox cbShowObjectDetails;
+        public System.Windows.Forms.Button btnClearScreen;
+        public System.Windows.Forms.TextBox txtClassName;
+        public System.Windows.Forms.RadioButton rdbClass;
+        public System.Windows.Forms.RadioButton rdbSelectTool;
+        public System.Windows.Forms.Panel pnlCenter;
+        public System.Windows.Forms.RadioButton rdbGeneralization;
+        public System.Windows.Forms.RadioButton rdbComposition;
+        public System.Windows.Forms.RadioButton rdbAggregation;
+        public System.Windows.Forms.RadioButton rdbRealization;
+        public System.Windows.Forms.RadioButton rdbAssociation;
+        public System.Windows.Forms.RadioButton rdbNone;
+        public System.Windows.Forms.ComboBox cbxRightMultiplicity;
+        public System.Windows.Forms.ComboBox cbxLeftMultiplicity;
+        public System.Windows.Forms.TextBox txtRelationshipName;
+        public System.Windows.Forms.Label ClassName;
     }
 }
 

@@ -8,21 +8,21 @@ namespace UML_parser
 {
     public partial class Parser : Form
     {
-        List <Class> listOfClasses;
-        List <Relationship> listOfRelationships;
-        Graphics g;
+        public List<Class> ListOfClasses { get; set; }
+        public List<Relationship> ListOfRelationships { get; set; }
+        public Graphics G { get; set; }
         Relationship relation;
         Class rectClass;
 
         public Parser()
         {
             InitializeComponent();
-            listOfClasses = new List <Class>();
-            listOfRelationships = new List<Relationship>();
-            g = pnlCenter.CreateGraphics();
+            ListOfClasses = new List <Class>();
+            ListOfRelationships = new List<Relationship>();
+            G = pnlCenter.CreateGraphics();
         }
 
-        private void PnlCenter_MouseClick(object sender, MouseEventArgs klik)
+        public void PnlCenter_MouseClick(object sender, MouseEventArgs klik)
         {
             if (rdbClass.Checked)
             {
@@ -34,7 +34,7 @@ namespace UML_parser
                         return;
                     }
 
-                    foreach (Class cl in listOfClasses)
+                    foreach (Class cl in ListOfClasses)
                     {
                         if (cl.Rect.Contains(klik.X, klik.Y) || cl.Rect.Contains(klik.X - cl.Rect.Width / 2, klik.Y - cl.Rect.Height / 2) || cl.Rect.Contains(klik.X + cl.Rect.Width, klik.Y + cl.Rect.Height) || cl.Rect.Contains(klik.X + cl.Rect.Width, klik.Y - cl.Rect.Height) || cl.Rect.Contains(klik.X - cl.Rect.Width, klik.Y + cl.Rect.Height))
                         {
@@ -57,8 +57,8 @@ namespace UML_parser
                         return;
                     }
 
-                    rectClass.Draw(g);
-                    listOfClasses.Add(rectClass);
+                    rectClass.Draw(G);
+                    ListOfClasses.Add(rectClass);
                     txtClassName.Text = "";
                 }
                 else if (rdbNone.Checked)
@@ -68,27 +68,27 @@ namespace UML_parser
             }
             else if (rdbSelectTool.Checked)
             {
-                if (listOfClasses.Count == 0)
+                if (ListOfClasses.Count == 0)
                 {
                     MessageBox.Show("Trenutno nema klasa za selekciju.", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                g.Clear(pnlCenter.BackColor);
+                G.Clear(pnlCenter.BackColor);
 
-                foreach (Class cl in listOfClasses)
+                foreach (Class cl in ListOfClasses)
                 {
                     if (rdbAggregation.Checked)
                     {
                         if (cl.Selected)
                         {
-                            foreach (Class cl1 in listOfClasses)
+                            foreach (Class cl1 in ListOfClasses)
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
                                     relation = new Relationship(cl, cl1, "aggregation");
-                                    listOfRelationships.Add(relation);
-                                    relation.Draw(g);
+                                    ListOfRelationships.Add(relation);
+                                    relation.Draw(G);
                                 }
                             }
                         }
@@ -97,13 +97,13 @@ namespace UML_parser
                     {
                         if (cl.Selected)
                         {
-                            foreach (Class cl1 in listOfClasses)
+                            foreach (Class cl1 in ListOfClasses)
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
                                     relation = new Relationship(cl, cl1, "association");
-                                    listOfRelationships.Add(relation);
-                                    relation.Draw(g);
+                                    ListOfRelationships.Add(relation);
+                                    relation.Draw(G);
                                 }
                             }
                         }
@@ -112,13 +112,13 @@ namespace UML_parser
                     {
                         if (cl.Selected)
                         {
-                            foreach (Class cl1 in listOfClasses)
+                            foreach (Class cl1 in ListOfClasses)
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
                                     relation = new Relationship(cl, cl1, "composition");
-                                    listOfRelationships.Add(relation);
-                                    relation.Draw(g);
+                                    ListOfRelationships.Add(relation);
+                                    relation.Draw(G);
                                 }
                             }
                         }
@@ -127,13 +127,13 @@ namespace UML_parser
                     {
                         if (cl.Selected)
                         {
-                            foreach (Class cl1 in listOfClasses)
+                            foreach (Class cl1 in ListOfClasses)
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
                                     relation = new Relationship(cl, cl1, "generalization");
-                                    listOfRelationships.Add(relation);
-                                    relation.Draw(g);
+                                    ListOfRelationships.Add(relation);
+                                    relation.Draw(G);
                                 }
                             }
                         }
@@ -142,13 +142,13 @@ namespace UML_parser
                     {
                         if (cl.Selected)
                         {
-                            foreach (Class cl1 in listOfClasses)
+                            foreach (Class cl1 in ListOfClasses)
                             {
                                 if (cl1.Rect.Contains(klik.X, klik.Y))
                                 {
                                     relation = new Relationship(cl, cl1, "realization");
-                                    listOfRelationships.Add(relation);
-                                    relation.Draw(g);
+                                    ListOfRelationships.Add(relation);
+                                    relation.Draw(G);
                                 }
                             }
                         }
@@ -159,7 +159,7 @@ namespace UML_parser
                         {
                             cl.Selected = true;
 
-                            foreach (Relationship relation in listOfRelationships)
+                            foreach (Relationship relation in ListOfRelationships)
                             {
                                 if (relation.Selected)
                                 {
@@ -174,16 +174,16 @@ namespace UML_parser
                         }
                     }
 
-                    cl.Draw(g);
+                    cl.Draw(G);
                 }
 
-                foreach (Relationship relation in listOfRelationships)
+                foreach (Relationship relation in ListOfRelationships)
                 {
                     if (Udaljenost(relation.LeftClass.Rect.X, relation.LeftClass.Rect.Y, klik.X, klik.Y) + Udaljenost(relation.RightClass.Rect.X, relation.RightClass.Rect.Y, klik.X, klik.Y) - Udaljenost(relation.RightClass.Rect.X, relation.RightClass.Rect.Y, relation.LeftClass.Rect.X, relation.LeftClass.Rect.Y) <= 1)
                     {
                         relation.Selected = true;
 
-                        foreach (Class cl in listOfClasses)
+                        foreach (Class cl in ListOfClasses)
                         {
                             if (cl.Selected)
                             {
@@ -197,7 +197,7 @@ namespace UML_parser
                         relation.Selected = false;
                     }
 
-                    relation.Draw(g);
+                    relation.Draw(G);
                 }
             }
             else
@@ -215,7 +215,7 @@ namespace UML_parser
         {
             if (txtDataType.Text != "" && txtPropertieName.Text != "" && cbxPropertieAccessor.SelectedItem != null)
             {
-                foreach (Class cl in listOfClasses)
+                foreach (Class cl in ListOfClasses)
                 {
                     if (cl.Selected)
                     {
@@ -235,7 +235,7 @@ namespace UML_parser
         {
             if (txtMethod.Text != "" && cbxMethodAccessor.SelectedItem != null)
             {
-                foreach (Class cl in listOfClasses)
+                foreach (Class cl in ListOfClasses)
                 {
                     if (cl.Selected)
                     {
@@ -251,18 +251,18 @@ namespace UML_parser
             }
         }
 
-        private void BtnClearScreen_Click(object sender, EventArgs e)
+        public void BtnClearScreen_Click(object sender, EventArgs e)
         {
-            g.Clear(BackColor);
-            listOfClasses.Clear();
-            listOfRelationships.Clear();
+            G.Clear(BackColor);
+            ListOfClasses.Clear();
+            ListOfRelationships.Clear();
         }
 
-        private void CbShowClassDetails_CheckedChanged(object sender, EventArgs e)
+        public void CbShowObjectDetails_CheckedChanged(object sender, EventArgs e)
         {
             if (cbShowObjectDetails.Checked)
             {
-                foreach (Class cl in listOfClasses)
+                foreach (Class cl in ListOfClasses)
                 {
                     if (cl.Selected)
                     {
@@ -289,7 +289,7 @@ namespace UML_parser
                     }
                 }
 
-                foreach (Relationship relation in listOfRelationships)
+                foreach (Relationship relation in ListOfRelationships)
                 {
                     if (relation.Selected)
                     {
@@ -336,7 +336,7 @@ namespace UML_parser
                             return;
                         }
 
-                        foreach (Relationship relation in listOfRelationships)
+                        foreach (Relationship relation in ListOfRelationships)
                         {
                             if (relation.Selected)
                             {

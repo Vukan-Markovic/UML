@@ -6,9 +6,9 @@ namespace Models
     public class Class
     {
         public Rectangle Rect { get; set; }
-        public string Name { get; set; }
         public List <Method> ListOfMethods { get; set; }
         public List <Propertie> ListOfProperties { get; set; }
+        public string Name { get; set; }
         public bool Selected { get; set; }
 
         public Class(Rectangle rect, string name)
