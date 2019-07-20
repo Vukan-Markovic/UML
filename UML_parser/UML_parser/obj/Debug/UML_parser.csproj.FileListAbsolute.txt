@@ -1,0 +1,23 @@
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\bin\Debug\UML_parser.exe.config
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\bin\Debug\UML_parser.exe
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\bin\Debug\UML_parser.pdb
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.UML_parser.resources
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.Properties.Resources.resources
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.csproj.GenerateResource.cache
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.csproj.CoreCompileInputs.cache
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.exe
+C:\Users\defaultuser0\source\repos\UML_parser\UML_parser\obj\Debug\UML_parser.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.Parser.resources
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.Properties.Resources.resources
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.csproj.GenerateResource.cache
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.csproj.CoreCompileInputs.cache
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\UML_parser.exe.config
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\UML_parser.exe
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\UML_parser.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\Models.exe
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\Models.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\bin\Debug\Models.exe.config
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.csproj.CopyComplete
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.exe
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\UML_parser\obj\Debug\UML_parser.csprojAssemblyReference.cache

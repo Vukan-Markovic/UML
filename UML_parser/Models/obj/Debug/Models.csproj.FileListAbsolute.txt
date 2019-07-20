@@ -1,0 +1,7 @@
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\bin\Debug\Models.exe.config
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\bin\Debug\Models.exe
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\bin\Debug\Models.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\obj\Debug\Models.exe
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\obj\Debug\Models.pdb
+C:\Users\defaultuser0\OneDrive\2. godina\Cetvrti semestar\Osnove testiranja softvera\Vezbe\IT20g2016_UML\UML_parser\Models\obj\Debug\Models.csprojAssemblyReference.cache
